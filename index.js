@@ -14,19 +14,20 @@ app.use(urlencoded({extended:true}));
 app.use(Cors({
     origin:'*',
 }));
-
+//getting all products
 app.get('/product',async (req,res)=>{
     let listOfProduct = await productModel.find();
     if (!listOfProduct) res.status(200).json({
         message: "No products found",
     })
     else res.status(200).json({
-        message: "Success fetchinf products",
+        message: "Success fetched products",
         products: listOfProduct
     })
 });
-
+//addding product
 app.post('/product/add', (req,res)=>{
+    console.log('entered');
     const { productId, productName, productDescription, hash } = req.body;
     let product = new productModel({
         productId: productId, 
